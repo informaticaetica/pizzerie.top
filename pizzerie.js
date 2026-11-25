@@ -43,7 +43,8 @@ const PIZZERIE = [
     indirizzo: "Campo de' Fiori 22",
     stile: "Al taglio",
     fonti: [
-      { portale: "Google", voto: 4.6, recensioni: 2016 }
+      { portale: "Google", voto: 4.6, recensioni: 2016 },
+      { portale: "Tripadvisor", voto: 4.5, recensioni: 2107 }
     ],
     statisticheTop: null,
     rilevato: "2026-11-25"
@@ -55,7 +56,8 @@ const PIZZERIE = [
     indirizzo: "Via dei Chiavari 34",
     stile: "Al taglio",
     fonti: [
-      { portale: "Google", voto: 4.5, recensioni: 8064 }
+      { portale: "Google", voto: 4.5, recensioni: 8064 },
+      { portale: "Tripadvisor", voto: 4.4, recensioni: 1685 }
     ],
     statisticheTop: null,
     rilevato: "2026-11-25"
@@ -67,7 +69,8 @@ const PIZZERIE = [
     indirizzo: "Piazza Rondanini 47",
     stile: "Napoletana",
     fonti: [
-      { portale: "Google", voto: 4.5, recensioni: 661 }
+      { portale: "Google", voto: 4.5, recensioni: 661 },
+      { portale: "Tripadvisor", voto: 4.4, recensioni: 134 }
     ],
     statisticheTop: null,
     rilevato: "2026-11-25"
@@ -79,7 +82,8 @@ const PIZZERIE = [
     indirizzo: "Via della Madonna dei Monti 95",
     stile: "Romana",
     fonti: [
-      { portale: "Google", voto: 4.4, recensioni: 4618 }
+      { portale: "Google", voto: 4.4, recensioni: 4618 },
+      { portale: "Tripadvisor", voto: 4.0, recensioni: 1919 }
     ],
     statisticheTop: null,
     rilevato: "2026-11-25"
@@ -91,7 +95,8 @@ const PIZZERIE = [
     indirizzo: "Piazza del Fico 29",
     stile: "Romana",
     fonti: [
-      { portale: "Google", voto: 4.3, recensioni: 3381 }
+      { portale: "Google", voto: 4.3, recensioni: 3381 },
+      { portale: "Tripadvisor", voto: 4.0, recensioni: 3200 }
     ],
     statisticheTop: null,
     rilevato: "2026-11-25"
@@ -103,7 +108,8 @@ const PIZZERIE = [
     indirizzo: "Via del Monte della Farina 28",
     stile: "Romana",
     fonti: [
-      { portale: "Google", voto: 4.2, recensioni: 6548 }
+      { portale: "Google", voto: 4.2, recensioni: 6548 },
+      { portale: "Tripadvisor", voto: 4.0, recensioni: 2934 }
     ],
     statisticheTop: null,
     rilevato: "2026-11-25"
@@ -115,7 +121,8 @@ const PIZZERIE = [
     indirizzo: "Via del Governo Vecchio 114",
     stile: "Romana",
     fonti: [
-      { portale: "Google", voto: 4.1, recensioni: 11135 }
+      { portale: "Google", voto: 4.1, recensioni: 11135 },
+      { portale: "Tripadvisor", voto: 3.6, recensioni: 5752 }
     ],
     statisticheTop: null,
     rilevato: "2026-11-25"
@@ -127,7 +134,8 @@ const PIZZERIE = [
     indirizzo: "Vicolo Savelli 13",
     stile: "Romana",
     fonti: [
-      { portale: "Google", voto: 4.0, recensioni: 7599 }
+      { portale: "Google", voto: 4.0, recensioni: 7599 },
+      { portale: "Tripadvisor", voto: 3.6, recensioni: 4469 }
     ],
     statisticheTop: null,
     rilevato: "2026-11-25"
