@@ -1,0 +1,103 @@
+:root {
+  --bg: #fffaf3;
+  --surface: #ffffff;
+  --text: #2a1f1a;
+  --muted: #6b5d55;
+  --accent: #c8102e;
+  --accent-2: #008c45;
+  --border: #eadfd3;
+  --radius: 14px;
+  --shadow: 0 2px 10px rgba(60, 30, 10, .07);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1513;
+    --surface: #241d1a;
+    --text: #f3ebe4;
+    --muted: #b5a79d;
+    --accent: #ff5a5f;
+    --accent-2: #3ccf7e;
+    --border: #3a2f2a;
+    --shadow: none;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+a { color: var(--accent); }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+header.site {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+header.site .wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap; padding-top: 14px; padding-bottom: 14px;
+}
+.logo { font-weight: 800; font-size: 1.35rem; text-decoration: none; color: var(--text); }
+.logo span { color: var(--accent); }
+nav a { margin-left: 18px; text-decoration: none; color: var(--muted); font-weight: 500; }
+nav a:first-child { margin-left: 0; }
+nav a:hover, nav a[aria-current="page"] { color: var(--accent); }
+
+.hero { padding: 56px 0 32px; text-align: center; }
+.hero h1 { font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.15; margin: 0 0 12px; }
+.hero p { color: var(--muted); font-size: 1.1rem; max-width: 640px; margin: 0 auto; }
+
+.filters {
+  display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+  margin: 24px 0 32px;
+}
+.filters input, .filters select {
+  font: inherit; padding: 10px 14px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  min-width: 0; flex: 1 1 200px; max-width: 320px;
+}
+
+.grid {
+  display: grid; gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  padding-bottom: 48px;
+}
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.card h2 { font-size: 1.2rem; margin: 0; }
+.meta { color: var(--muted); font-size: .92rem; }
+.score {
+  align-self: flex-start; font-weight: 800; font-size: 1.05rem;
+  background: var(--accent); color: #fff; border-radius: 8px; padding: 2px 10px;
+}
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-size: .8rem; border: 1px solid var(--border); border-radius: 999px;
+  padding: 1px 10px; color: var(--muted);
+}
+.badge-demo {
+  font-size: .75rem; font-weight: 700; color: var(--accent-2);
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.empty { text-align: center; color: var(--muted); padding: 40px 0; }
+
+.page { padding: 40px 0 64px; max-width: 720px; }
+.page h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.2; }
+.page ol li, .page ul li { margin-bottom: 8px; }
+
+footer.site {
+  border-top: 1px solid var(--border); color: var(--muted);
+  font-size: .9rem; padding: 24px 0; text-align: center;
+}
+
+@media (max-width: 560px) {
+  nav a { margin-left: 12px; }
+  .hero { padding-top: 36px; }
+}

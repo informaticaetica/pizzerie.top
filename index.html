@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pizzerie.top – Le migliori pizzerie d'Italia</title>
+  <meta name="description" content="Guida e classifica delle migliori pizzerie italiane, città per città, con recensioni e criteri di valutazione trasparenti.">
+  <link rel="canonical" href="https://pizzerie.top/">
+  <meta property="og:title" content="Pizzerie.top – Le migliori pizzerie d'Italia">
+  <meta property="og:description" content="Guida e classifica delle migliori pizzerie italiane, città per città.">
+  <meta property="og:url" content="https://pizzerie.top/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍕</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <a class="logo" href="./">pizzerie<span>.top</span></a>
+      <nav>
+        <a href="./" aria-current="page">Classifica</a>
+        <a href="metodo.html">Come valutiamo</a>
+        <a href="contatti.html">Contatti</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Le migliori pizzerie d'Italia 🍕</h1>
+      <p>Una guida indipendente, città per città: impasto, cottura, ingredienti e servizio valutati con criteri chiari.</p>
+    </section>
+
+    <div class="filters">
+      <input id="cerca" type="search" placeholder="Cerca per nome…" aria-label="Cerca pizzeria">
+      <select id="citta" aria-label="Filtra per città"><option value="">Tutte le città</option></select>
+      <select id="stile" aria-label="Filtra per stile"><option value="">Tutti gli stili</option></select>
+    </div>
+
+    <section id="elenco" class="grid" aria-live="polite"></section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">© <span id="anno"></span> pizzerie.top · Recensioni indipendenti</div>
+  </footer>
+
+  <script src="pizzerie.js"></script>
+  <script>
+    const elenco = document.getElementById('elenco');
+    const cerca = document.getElementById('cerca');
+    const selCitta = document.getElementById('citta');
+    const selStile = document.getElementById('stile');
+    document.getElementById('anno').textContent = new Date().getFullYear();
+
+    const unici = k => [...new Set(PIZZERIE.map(p => p[k]))].sort();
+    for (const c of unici('citta')) selCitta.add(new Option(c, c));
+    for (const s of unici('stile')) selStile.add(new Option(s, s));
+
+    const esc = s => String(s).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+
+    function mostra() {
+      const q = cerca.value.trim().toLowerCase();
+      const lista = PIZZERIE
+        .filter(p => (!q || p.nome.toLowerCase().includes(q))
+          && (!selCitta.value || p.citta === selCitta.value)
+          && (!selStile.value || p.stile === selStile.value))
+        .sort((a, b) => b.voto - a.voto);
+
+      if (!lista.length) {
+        elenco.innerHTML = '<p class="empty">Nessuna pizzeria trovata.</p>';
+        return;
+      }
+      elenco.innerHTML = lista.map(p => `
+        <article class="card">
+          ${p.esempio ? '<span class="badge-demo">Scheda di esempio</span>' : ''}
+          <span class="score">${esc(p.voto.toFixed(1))}</span>
+          <h2>${esc(p.nome)}</h2>
+          <div class="meta">${esc(p.citta)} · ${esc(p.stile)} · ${esc(p.prezzo)}</div>
+          <p>${esc(p.descrizione)}</p>
+          <div class="tags">${(p.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+        </article>`).join('');
+    }
+    [cerca, selCitta, selStile].forEach(el => el.addEventListener('input', mostra));
+    mostra();
+  </script>
+</body>
+</html>
