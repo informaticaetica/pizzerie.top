@@ -20,6 +20,7 @@
         <a href="./" aria-current="page">Classifica</a>
         <a href="metodo.html">Come valutiamo</a>
         <a href="contatti.html">Contatti</a>
+        <a class="cta" href="proponi.html">Proponi la tua pizzeria</a>
       </nav>
     </div>
   </header>
@@ -41,7 +42,7 @@
   </main>
 
   <footer class="site">
-    <div class="wrap">© <span id="anno"></span> pizzerie.top · Recensioni indipendenti</div>
+    <div class="wrap">© <span id="anno"></span> pizzerie.top · Recensioni indipendenti · <a href="proponi.html">Proponi la tua pizzeria</a></div>
   </footer>
 
   <script src="pizzerie.js"></script>
@@ -90,6 +91,8 @@
           </div>
           <h2>${esc(p.nome)}</h2>
           <div class="meta">${esc(p.indirizzo)}, ${esc(p.citta)} · ${esc(p.zona)} · ${esc(p.stile)}</div>
+          ${p.curiosita ? `<ul class="curiosita">${p.curiosita.map(c => `<li>${esc(c)}</li>`).join('')}</ul>` : ''}
+          ${p.sito ? `<a class="sito" href="${esc(p.sito)}" target="_blank" rel="noopener nofollow">🌐 ${esc(p.sitoEtichetta || 'Sito ufficiale')}</a>` : ''}
           <ul class="fonti">${p.fonti.map(f =>
             `<li><span>${esc(f.portale)}</span><span>${esc(f.voto.toFixed(1).replace('.', ','))} ★ · ${num(f.recensioni)}</span></li>`).join('')}
           </ul>
