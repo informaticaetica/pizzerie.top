@@ -82,6 +82,22 @@ nav a:hover, nav a[aria-current="page"] { color: var(--accent); }
   font-size: .8rem; border: 1px solid var(--border); border-radius: 999px;
   padding: 1px 10px; color: var(--muted);
 }
+.hero .sub { margin-top: 12px; font-weight: 600; color: var(--text); }
+.score-row { display: flex; align-items: center; gap: 10px; }
+.score small { font-weight: 500; font-size: .75em; opacity: .85; margin-left: 1px; }
+.fonti { list-style: none; margin: 4px 0 0; padding: 0; font-size: .92rem; }
+.fonti li {
+  display: flex; justify-content: space-between; gap: 12px;
+  padding: 4px 0; border-top: 1px dashed var(--border);
+}
+.fonti li span:last-child { color: var(--muted); white-space: nowrap; }
+.small { font-size: .8rem; }
+.badge-ok, .badge-calc {
+  align-self: flex-start; font-size: .75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .04em; text-decoration: none;
+}
+.badge-ok { color: var(--accent-2); }
+.badge-calc { color: var(--muted); }
 .badge-demo {
   font-size: .75rem; font-weight: 700; color: var(--accent-2);
   text-transform: uppercase; letter-spacing: .04em;

@@ -27,7 +27,8 @@
   <main class="wrap">
     <section class="hero">
       <h1>Le migliori pizzerie d'Italia 🍕</h1>
-      <p>Una guida indipendente, città per città: impasto, cottura, ingredienti e servizio valutati con criteri chiari.</p>
+      <p>Pizzerie.top è la guida alle pizzerie migliori costruita sui voti di chi ci è stato davvero: mettiamo insieme le recensioni di Google, Tripadvisor e dei portali di prenotazione, le validiamo con <a href="https://statistiche.top" rel="noopener">statistiche.top</a> e aggiorniamo la classifica con le segnalazioni degli utenti.</p>
+      <p class="sub">Si parte da Roma: le prime 10 pizzerie del centro storico.</p>
     </section>
 
     <div class="filters">
@@ -51,6 +52,15 @@
     const selStile = document.getElementById('stile');
     document.getElementById('anno').textContent = new Date().getFullYear();
 
+    // Media pesata sul numero di recensioni di ogni portale (scala 1–5)
+    for (const p of PIZZERIE) {
+      const tot = p.fonti.reduce((s, f) => s + f.recensioni, 0);
+      p.media = p.fonti.reduce((s, f) => s + f.voto * f.recensioni, 0) / tot;
+      p.totRecensioni = tot;
+    }
+    const num = n => n.toLocaleString('it-IT');
+    const data = d => new Date(d).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+
     const unici = k => [...new Set(PIZZERIE.map(p => p[k]))].sort();
     for (const c of unici('citta')) selCitta.add(new Option(c, c));
     for (const s of unici('stile')) selStile.add(new Option(s, s));
@@ -63,20 +73,27 @@
         .filter(p => (!q || p.nome.toLowerCase().includes(q))
           && (!selCitta.value || p.citta === selCitta.value)
           && (!selStile.value || p.stile === selStile.value))
-        .sort((a, b) => b.voto - a.voto);
+        .sort((a, b) => b.media - a.media || b.totRecensioni - a.totRecensioni);
 
       if (!lista.length) {
         elenco.innerHTML = '<p class="empty">Nessuna pizzeria trovata.</p>';
         return;
       }
-      elenco.innerHTML = lista.map(p => `
+      elenco.innerHTML = lista.map((p, i) => `
         <article class="card">
-          ${p.esempio ? '<span class="badge-demo">Scheda di esempio</span>' : ''}
-          <span class="score">${esc(p.voto.toFixed(1))}</span>
+          ${p.statisticheTop
+            ? `<a class="badge-ok" href="${esc(p.statisticheTop)}" rel="noopener">✓ Validata da statistiche.top</a>`
+            : '<span class="badge-calc">Media calcolata da pizzerie.top</span>'}
+          <div class="score-row">
+            <span class="score">${esc(p.media.toFixed(1).replace('.', ','))}<small>/5</small></span>
+            <span class="meta">#${i + 1} · ${num(p.totRecensioni)} recensioni</span>
+          </div>
           <h2>${esc(p.nome)}</h2>
-          <div class="meta">${esc(p.citta)} · ${esc(p.stile)} · ${esc(p.prezzo)}</div>
-          <p>${esc(p.descrizione)}</p>
-          <div class="tags">${(p.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+          <div class="meta">${esc(p.indirizzo)}, ${esc(p.citta)} · ${esc(p.zona)} · ${esc(p.stile)}</div>
+          <ul class="fonti">${p.fonti.map(f =>
+            `<li><span>${esc(f.portale)}</span><span>${esc(f.voto.toFixed(1).replace('.', ','))} ★ · ${num(f.recensioni)}</span></li>`).join('')}
+          </ul>
+          <div class="meta small">Voti rilevati il ${esc(data(p.rilevato))}</div>
         </article>`).join('');
     }
     [cerca, selCitta, selStile].forEach(el => el.addEventListener('input', mostra));
