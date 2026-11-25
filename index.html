@@ -82,14 +82,13 @@
       }
       elenco.innerHTML = lista.map((p, i) => `
         <article class="card">
-          ${p.statisticheTop
-            ? `<a class="badge-ok" href="${esc(p.statisticheTop)}" rel="noopener">✓ Validata da statistiche.top</a>`
-            : '<span class="badge-calc">Media calcolata da pizzerie.top</span>'}
+          <span class="badge-calc">Media calcolata da pizzerie.top</span>
           <div class="score-row">
             <span class="score">${esc(p.media.toFixed(1).replace('.', ','))}<small>/5</small></span>
             <span class="meta">#${i + 1} · ${num(p.totRecensioni)} recensioni</span>
           </div>
-          <h2>${esc(p.nome)}</h2>
+          <h2><a class="titolo" href="pizzeria/${esc(p.slug)}.html">${esc(p.nome)}</a></h2>
+          ${p.citazione ? `<blockquote class="citazione"><p>“${esc(p.citazione.testo)}”</p><footer>— ${esc(p.citazione.fonte)}</footer></blockquote>` : ''}
           <div class="meta">${esc(p.indirizzo)}, ${esc(p.citta)} · ${esc(p.zona)} · ${esc(p.stile)}</div>
           ${p.curiosita ? `<ul class="curiosita">${p.curiosita.map(c => `<li>${esc(c)}</li>`).join('')}</ul>` : ''}
           ${p.sito ? `<a class="sito" href="${esc(p.sito)}" target="_blank" rel="noopener nofollow">🌐 ${esc(p.sitoEtichetta || 'Sito ufficiale')}</a>` : ''}
@@ -97,6 +96,10 @@
             `<li><span>${esc(f.portale)}</span><span>${esc(f.voto.toFixed(1).replace('.', ','))} ★ · ${num(f.recensioni)}</span></li>`).join('')}
           </ul>
           <div class="meta small">Voti rilevati il ${esc(data(p.rilevato))}</div>
+          <div class="azioni">
+            <a href="pizzeria/${esc(p.slug)}.html">Scheda e condivisione →</a>
+            ${p.statisticheTop ? `<a href="${esc(p.statisticheTop)}#st-recensisci" rel="noopener">✍️ Scrivi la tua recensione</a>` : ''}
+          </div>
         </article>`).join('');
     }
     [cerca, selCitta, selStile].forEach(el => el.addEventListener('input', mostra));

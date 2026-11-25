@@ -92,6 +92,28 @@ nav a:hover, nav a[aria-current="page"] { color: var(--accent); }
 }
 .fonti li span:last-child { color: var(--muted); white-space: nowrap; }
 .small { font-size: .8rem; }
+.titolo { color: var(--text); text-decoration: none; }
+.titolo:hover { color: var(--accent); }
+.citazione {
+  margin: 4px 0; padding: 8px 12px; border-left: 3px solid var(--accent);
+  background: var(--bg); border-radius: 0 8px 8px 0; font-style: italic;
+}
+.citazione p { margin: 0; }
+.citazione footer { font-style: normal; font-size: .8rem; color: var(--muted); margin-top: 4px; }
+.azioni {
+  display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: auto;
+  padding-top: 10px; border-top: 1px solid var(--border); font-size: .92rem; font-weight: 600;
+}
+.azioni a { text-decoration: none; }
+.score.big { font-size: 1.6rem; padding: 4px 14px; }
+.share { display: flex; flex-wrap: wrap; gap: 8px; }
+.share a, .share button {
+  font: inherit; font-size: .92rem; font-weight: 600; text-decoration: none; cursor: pointer;
+  border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  padding: 8px 14px; border-radius: 999px;
+}
+.share a:hover, .share button:hover { border-color: var(--accent); color: var(--accent); }
+.cta-box h2 { margin-top: 0; }
 .curiosita { margin: 0; padding-left: 18px; font-size: .92rem; }
 .curiosita li { margin-bottom: 2px; }
 .sito { font-size: .92rem; font-weight: 600; text-decoration: none; align-self: flex-start; }
